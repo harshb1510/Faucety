@@ -1,35 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Sidebar from "../Components/Sidebar";
 
 const JoinPool = () => {
   const [pool, setPool] = useState({});
   const [amount, setAmount] = useState("");
+  const [winner, setWinner] = useState(null); // State to store the winner
   const { id } = useParams();
   const user = JSON.parse(localStorage.getItem("user")) || {};
-
-  const [winner, setWinner] = useState(null);
-
-  const handleSelectWinner = async () => {
-    try {
-      const response = await fetch('http://localhost:8000/selectWinner/:id', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-       
-      });
-      const data = await response.json();
-      setWinner(data.winner); // Assuming the winner is returned from the backend in the response
-    } catch (error) {
-      console.error('Error selecting winner:', error);
-    }
-  };
-
-  const handleClosePopup = () => {
-    setWinner(null);
-  };
-
 
   useEffect(() => {
     const fetchPoolDetails = async () => {
@@ -63,12 +41,29 @@ const JoinPool = () => {
         }
       );
       const data = await response.json();
-
       setAmount("");
     } catch (error) {
       console.error("Error joining pool:", error);
     }
   };
+
+  // Function to handle selecting a winner
+  const handleSelectWinner = async () => {
+    try {
+      const response = await fetch(`http://localhost:8000/stake/selectWinner/${id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await response.json();
+      console.log(data)
+      setWinner(data.winner); // Assuming the winner is returned from the backend in the response
+    } catch (error) {
+      console.error("Error selecting winner:", error);
+    }
+  };
+  
 
   return (
     <div className="flex h-screen bg-3f757e text-yellow-500">
@@ -102,17 +97,35 @@ const JoinPool = () => {
         </div>
         <button
           onClick={handleJoinPool}
-          className="bg-yellow-600 hover:bg-yellow-700 text-white py-2 px-4 rounded-md hover:bg-primary-700 focus:outline-none focus:bg-primary-600"
+          className="bg-yellow-600 hover:bg-yellow-700 text-white py-2 px-4 rounded-md hover:bg-primary-700 focus:outline-none focus:bg-primary-600 mr-4"
         >
           Join Pool
         </button>
+        
+        {/* Button to select winner */}
         <button
-              onClick={handleClosePopup}
+          onClick={handleSelectWinner}
+          className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-md hover:bg-primary-700 focus:outline-none focus:bg-primary-600"
+        >
+          Select Winner
+        </button>
+      </div>
+
+      {/* Popup to display the winner */}
+      {winner && (
+        <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 flex justify-center items-center">
+          <div className="bg-white rounded-lg p-8">
+            <h2 className="text-2xl font-bold mb-4">Winner:</h2>
+            <p className="text-xl">{winner}</p>
+            <button
+              onClick={() => setWinner(null)}
               className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
             >
               Close
             </button>
-      </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
