@@ -14,6 +14,21 @@ export default function Portfolio() {
   const [usdtAmount, setUsdtAmount] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [isScanning, setIsScanning] = useState(false);
+  const [user,setUser] = useState({});
+
+  useEffect(() => {
+    const getUser = async () => {
+      const user = JSON.parse(localStorage.getItem("user"));
+      const data = await axios.get("http://localhost:8000/users/getUser", {
+        headers: {
+          "x-auth-token": user._id,
+        },
+      });
+      console.log(data.data.user);
+      setUser(data.data.user);
+    };
+    getUser();
+  }, []);
 
   const qrData = async (text) => {
     const deposit = JSON.parse(text);
@@ -25,7 +40,9 @@ export default function Portfolio() {
 
   const handlePayment = async () => {
     console.log(usdtAmount);
-    const user = JSON.parse(localStorage.getItem("user"));
+    
+  
+    
     const data = {
       senderId: user._id,
       receiverId: userId,
@@ -42,8 +59,8 @@ export default function Portfolio() {
     }
   };
 
-  const user = JSON.parse(localStorage.getItem("user"));
-  console.log("hello", user);
+  
+  
   const [bookingData, setBookingData] = useState(null);
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
@@ -84,8 +101,8 @@ export default function Portfolio() {
                   </div>
                   <div className="flex justify-between">
                     <h1 className="mr-20 ml-4 font-bold text-lg">
-                      {user?.wallet ? `$${user.wallet}` : "Loading..."}
-                      <span className="text-xs">Balance</span>
+                      ${user?.wallet}
+                     
                     </h1>
                     <h1 className="font-bold text-sm mt-3">
                       {user?.userName}@ybl
@@ -146,12 +163,12 @@ export default function Portfolio() {
         </div>
 
         {bookingData && (
-          <div className="flex flex-col items-center mt-[80px]">
+          <div className="flex flex-col items-center mt-[80px] bg-white p-4">
             <QRCode
               value={JSON.stringify(bookingData)}
-              style={{ width: "200px", height: "200px" }}
+              style={{ width: "200px", height: "200px",marginTop:'25px' }}
             />
-            <p className="mt-4  px-4 py-2 font-bold text-white bg-b-900 rounded-md">
+            <p className="mt-4  px-4 py-2 font-bold text-black bg-b-900 rounded-md">
               Receive Money through this QR
             </p>
           </div>

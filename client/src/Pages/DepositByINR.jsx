@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { Button, TextField } from '@mui/material';
 import axios from 'axios';
 import Sidebar from '../Components/Sidebar';
+import { useNavigate } from 'react-router-dom';
 
 const DepositByINR = () => {
   const [userId, setUserId] = useState("");
   const [usdtAmount, setUsdtAmount] = useState("");
-
+  const history = useNavigate();
   const loadRazorpayScript = async () => {
     const script = document.createElement("script");
     script.src = "https://checkout.razorpay.com/v1/checkout.js";
@@ -55,6 +56,7 @@ const DepositByINR = () => {
             amount: usdtAmount,
             userId: userId
           });
+          history('/portfolio')
         } catch (err) {
           console.log(err);
         }
