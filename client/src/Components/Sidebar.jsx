@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function Sidebar() {
    const [userFound,setUserFound] = useState(false);
@@ -12,10 +13,13 @@ useEffect(() => {
    
 
 }, []);
+
+const navigate=useNavigate();
 const logout=()=>{
    localStorage.removeItem('token');
    localStorage.removeItem('user');
-
+   window.location.href = '/login';
+   
 }
  
   return (
