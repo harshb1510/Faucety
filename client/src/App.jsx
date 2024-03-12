@@ -6,7 +6,7 @@ import Deposit from "./Pages/Deposit.jsx";
 import NFTMint from "./Pages/nftMint.jsx";
 import ClaimNft from "./Pages/claimNft.jsx";
 import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 import Home from "./Pages/Home.jsx";
 import Invest from "./Pages/Invest.jsx";
 import Scan from "./Pages/Scan.jsx";
@@ -15,6 +15,9 @@ import StakePools from "./Pages/StakePools.jsx";
 import CreatePool from "./Pages/CreatePool.jsx";
 import JoinPool from "./Pages/JoinPool.jsx";
 import SelectWinner from "./Pages/SelectWinner.jsx";
+import Borrow from "./Pages/Borrow.jsx";
+import Profile from "./Pages/Profile.jsx";
+
 
 
 
@@ -23,22 +26,23 @@ const App = () => (
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login/>} />
+        <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path ='/deposit' element={<Deposit />} />
         <Route path= "/depositByINR" element={<DepositByINR/>}/>
         <Route path ='/scan' element={<Scan />} />
         <Route path="/nftMint" element={<NFTMint/>} />
         <Route path="/claimNft" element={<ClaimNft/>} />
-        <Route path='/invest' element={<Invest/>}/>
         <Route path="/stakePools" element={<StakePools/>}/>
         <Route path="/createPool" element={<CreatePool/>}/>
         <Route path="/joinPool/:id" element={<JoinPool/>}/>
         <Route path="/selectWinner/:id" element={<SelectWinner/>}/>
+        <Route path='/invest'element={<Invest/>}/>
+        <Route path='/profile' element={<Profile/>}/>
+        <Route path="/borrow" element={<Borrow />} />
       </Routes>
-      <ToastContainer/>
+      <ToastContainer />
     </Router>
-
   </div>
 );
 
