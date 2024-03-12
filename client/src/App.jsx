@@ -13,6 +13,7 @@ import Scan from "./Pages/Scan.jsx";
 import DepositByINR from "./Pages/DepositByINR.jsx";
 import Borrow from "./Pages/Borrow.jsx";
 import Profile from "./Pages/Profile.jsx";
+import Portfolio from "./Pages/Portfolio.jsx";
 
 
 
@@ -32,6 +33,7 @@ const App = () => (
         <Route path='/invest'element={<Invest/>}/>
         <Route path='/profile' element={<Profile/>}/>
         <Route path="/borrow" element={<Borrow />} />
+        <Route path='/portfolio' element={<Portfolio/>}/>
       </Routes>
       <ToastContainer />
     </Router>
