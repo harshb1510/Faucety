@@ -124,9 +124,11 @@ const NftSHM = () => {
     <>
     <Sidebar  />
       {connected ? (
-        <p className="flex justify-end mr-1 p-2 text-black mt-8 bg-yellow-500 rounded-lg font-bold ">
+        <div className="ml-[1050px]">
+        <p className="flex justify-end  mr-1 p-2 text-black mt-8 bg-yellow-500 rounded-lg font-bold ">
           {selectedAddress}
         </p>
+        </div>
       ) : (
         <div className="flex  justify-end">
           <button
