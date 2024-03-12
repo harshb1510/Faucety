@@ -16,6 +16,7 @@ import CreatePool from "./Pages/CreatePool.jsx";
 import JoinPool from "./Pages/JoinPool.jsx";
 import Borrow from "./Pages/Borrow.jsx";
 import Profile from "./Pages/Profile.jsx";
+import NftSHM from "./Pages/NftSHM.jsx";
 import Portfolio from "./Pages/Portfolio.jsx";
 
 
@@ -39,6 +40,7 @@ const App = () => (
         <Route path='/invest'element={<Invest/>}/>
         <Route path='/profile' element={<Profile/>}/>
         <Route path="/borrow" element={<Borrow />} />
+        <Route path="/nftSHM" element={<NftSHM/>}></Route>
         <Route path='/portfolio' element={<Portfolio/>}/>
       </Routes>
       <ToastContainer />
