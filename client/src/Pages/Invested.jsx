@@ -19,7 +19,7 @@ const Invested = () => {
           },
         }
       );
-      console.log(response.data);
+      console.log(response.data.invest);
     } catch (error) {
       console.log(error);
     }
