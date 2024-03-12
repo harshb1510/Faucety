@@ -61,7 +61,13 @@ export default function Portfolio() {
       <div className="flex justify-center items-center  gap-[90px] pt-10">
         <Sidebar />
         <div>
-          <h1 className="text-center text-white text-4xl mb-10">Portolio</h1>
+          <div className="flex justify-between ">
+          <h1 className="text-center mr-20  text-white text-4xl mb-10">Portolio</h1>
+          <button className="ml-10 mb-8 bg-yellow-500 border rounded-xl font-bold p-2">Wallet:${user.wallet}</button>
+
+          <button className="ml-2 mb-8 bg-yellow-500 border font-bold rounded-xl p-2">Staked:${user.staked}</button>
+          </div>
+
           <div className="flex justify-center">
             <div className="bg-white rounded-xl w-96  p-3">
               <div className="flex ">
@@ -111,7 +117,7 @@ export default function Portfolio() {
                       </div>
                       <div className="flex justify-between">
                         <h1 className="mr-20 ml-4 text-xs">USDC token</h1>
-                        <h1 className="text-xs">$120</h1>
+                        <h1 className="text-xs">120</h1>
                       </div>
                     </div>
                   </div>
@@ -124,12 +130,12 @@ export default function Portfolio() {
                     </div>
                     <div className="">
                       <div className="flex justify-between">
-                        <h1 className="mr-40 ml-4">USDC</h1>
-                        <h1>$120</h1>
+                        <h1 className="mr-40 ml-4 font-bold">MATIC</h1>
+                        <h1 className="font-bold">$50</h1>
                       </div>
                       <div className="flex justify-between">
-                        <h1 className="mr-20 ml-4 text-xs">USDC token</h1>
-                        <h1 className="text-xs">$120</h1>
+                        <h1 className="mr-20 ml-4 text-xs">MATIC token</h1>
+                        <h1 className="text-xs">41</h1>
                       </div>
                     </div>
                   </div>
@@ -145,22 +151,20 @@ export default function Portfolio() {
               value={JSON.stringify(bookingData)}
               style={{ width: "200px", height: "200px" }}
             />
-            <p
-              className="mt-4  px-4 py-2 font-bold text-white bg-b-900 rounded-md"
-            >
+            <p className="mt-4  px-4 py-2 font-bold text-white bg-b-900 rounded-md">
               Receive Money through this QR
             </p>
           </div>
         )}
       </div>
-      <div >
-        {!isScanning&&(
-        <button
-          onClick={() => setIsScanning(true)}
-          className="bg-white rounded p-3 ml-[690px] mt-[60px] font-bold"
-        >
-          Send Money
-        </button>
+      <div>
+        {!isScanning && (
+          <button
+            onClick={() => setIsScanning(true)}
+            className="bg-white rounded p-3 ml-[690px] mt-[60px] font-bold"
+          >
+            Send Money
+          </button>
         )}
         {isScanning && (
           <div className="h-[370px] w-[370px] m-auto pt-4 pl-8">

@@ -8,6 +8,7 @@ const {
   borrow,
   addInvest,
   getInvest,
+  loanPay,
 } = require("../controllers/userController.js");
 
 const router = express.Router();
@@ -20,5 +21,6 @@ router.route("/sendCryptoUpi").post(sendCryptoUpi);
 router.route("/borrow").post(borrow);
 router.route("/addInvest").post(addInvest);
 router.route("/getInvest").get(getInvest);
+router.route("/loanPay").post(loanPay);
 
 module.exports=router;

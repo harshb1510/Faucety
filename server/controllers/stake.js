@@ -181,7 +181,6 @@ const selectWinner = async (req, res) => {
     winnerUser.wallet += stakingPool.totalStakedAmount;
     await winnerUser.save();
 
-    // Assign the winner's ObjectId to the winner field
     stakingPool.winner = winnerUser._id;
     await stakingPool.save();
 
