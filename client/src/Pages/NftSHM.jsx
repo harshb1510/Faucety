@@ -121,11 +121,11 @@ const NftSHM = () => {
 
   return (
     <>
-      <h1>NFT SHM</h1>
       {connected ? (
         <p>{selectedAddress}</p>
       ) : (
-        <button onClick={handleConnect}>Connect Wallet</button>
+        <div className="flex  justify-end">
+        <button className="flex justify-end mr-10 border p-2 text-black mt-8 bg-yellow-500 rounded-lg font-bold " onClick={handleConnect}>Connect Wallet</button></div>
       )}
       <div
         style={{
