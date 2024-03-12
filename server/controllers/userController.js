@@ -85,6 +85,20 @@ const sendCryptoUpi = async (req, res) => {
   }
 }
 
+const borrow = async (req, res) => {
+  const { userId, borrowedINR,borrowedUSDT } = req.body;
+  const user = await User.findOne({ _id: userId }); 
+  if (user) {
+    user.wallet -= parseInt(borrowedUSDT);
+    user.borrow += parseInt(borrowedINR);
+    await user.save();
+    res.status(200).send({ message: "Borrow Successful" });
+  } else {
+    res.status(404).send({ message: "User Not Found" });
+  }
+}
+
+
 
 module.exports = {
   loginUser,
@@ -92,4 +106,5 @@ module.exports = {
   getUser,
   sendCrypto,
   sendCryptoUpi,
+  borrow,
 };

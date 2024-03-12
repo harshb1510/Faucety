@@ -28,6 +28,10 @@ const userSchema = mongoose.Schema({
     type: Number,
     default: 0,
   },
+  borrow:{
+    type:Number,
+    default:0,
+  }
 });
 
 userSchema.methods.matchPassword = async function (enteredPassword) {
