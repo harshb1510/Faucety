@@ -35,7 +35,7 @@ const Invested = () => {
       <h1 className="text-center text-white font-bold text-3xl mb-20">
         Invested History
       </h1>
-      <div class=" ml-72 bg-black mr-40">
+      <div class=" ml-72 bg-black mr-[19rem]">
         <table class="table-auto border-collapse border border-gray-400  ">
           <thead>
             <tr>

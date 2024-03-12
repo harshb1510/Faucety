@@ -55,7 +55,7 @@ export default function Portfolio() {
     console.log(response);
     if (response.status === 200) {
       setShowModal(false);
-      history("/");
+      history("/portfolio");
     }
   };
 

@@ -42,6 +42,7 @@ const JoinPool = () => {
       );
       const data = await response.json();
       setAmount("");
+      window.location.reload();
     } catch (error) {
       console.error("Error joining pool:", error);
     }

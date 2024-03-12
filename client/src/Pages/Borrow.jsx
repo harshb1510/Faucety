@@ -4,13 +4,26 @@ import { useNavigate } from "react-router-dom";
 import emailjs from "@emailjs/browser";
 import axios from "axios";
 
+
 const Borrow = () => {
   const [borrowedINR, setBorrowedINR] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [userData,setUserData] = useState({});
-
+  const [userId, setUserId] = useState("");
   const history = useNavigate();
 
+  const loadRazorpayScript = async () => {
+    const script = document.createElement("script");
+    script.src = "https://checkout.razorpay.com/v1/checkout.js";
+    script.async = true;
+    script.onload = () => {};
+    document.body.appendChild(script);
+  };
+  React.useEffect(() => {
+    loadRazorpayScript();
+    const user = JSON.parse(localStorage.getItem("user"));
+    setUserId(user._id);
+  }, []);
   const handleBorrowINR = () => {
     const usdtAmount = (parseFloat(borrowedINR) / 82.8).toFixed(2);
     setShowModal(true);
@@ -33,7 +46,9 @@ const Borrow = () => {
           await axios.post(verifyUrl, verifyData);
           await axios.post("http://localhost:8000/users/loanPay", {
             amount: userData.borrow,
+            userId:userId
           });
+          window.location.reload();
         } catch (err) {
           console.log(err);
         }
@@ -110,7 +125,7 @@ const Borrow = () => {
         console.error("Error sending email:", error);
       });
     setShowModal(false);
-    history("/");
+    history("/portfolio");
   };
 
 
@@ -149,7 +164,7 @@ const Borrow = () => {
           <h2 className="text-xl font-bold mb-4">Your Loan Details</h2>
           <div className="mb-4 text-center">
             <p className="text-gray-700 text-sm font-bold mb-2">
-              Borrowed USDT: {userData.borrow}
+              Borrowed Amount: Rs.{userData.borrow}
             </p>
           <button onClick={handleAddMoney} className="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
             Repay

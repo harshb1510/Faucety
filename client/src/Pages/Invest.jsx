@@ -17,7 +17,7 @@ export default function Invest() {
       totalAmount,
       dip,
     });
-    console.log(data);
+    window.location.href='/invested';
   };
 
   return (
