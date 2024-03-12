@@ -105,7 +105,15 @@ const addInvest = async (req, res) => {
   if (user) {
     user.wallet -= totalAmount;
     await user.save();
-    const invest = await Invest.create({ userId, totalAmount, dip });
+    const remainInvest = totalAmount - totalAmount * 0.2;
+    const invested = totalAmount * 0.2;
+    const invest = await Invest.create({
+      userId,
+      totalAmount,
+      dip,
+      remainInvest,
+      invested,
+    });
     if (invest) {
       res.status(200).send({ message: "Investment Successful" });
     } else {
@@ -119,7 +127,7 @@ const addInvest = async (req, res) => {
 const getInvest = async (req, res) => {
   const userId = req.headers["x-auth-token"];
   if (userId) {
-    const invest = await Invest.findOne({ userId : userId });
+    const invest = await Invest.find({ userId: userId });
     if (invest) {
       return res.status(200).send({ invest });
     }
