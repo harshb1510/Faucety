@@ -11,7 +11,7 @@ import Home from "./Pages/Home.jsx";
 import Invest from "./Pages/Invest.jsx";
 import Scan from "./Pages/Scan.jsx";
 import DepositByINR from "./Pages/DepositByINR.jsx";
-
+import Profile from "./Pages/Profile.jsx";
 
 
 
@@ -29,6 +29,7 @@ const App = () => (
         <Route path="/nftMint" element={<NFTMint/>} />
         <Route path="/claimNft" element={<ClaimNft/>} />
         <Route path='/invest'element={<Invest/>}/>
+        <Route path='/profile' element={<Profile/>}/>
       </Routes>
       <ToastContainer/>
     </Router>

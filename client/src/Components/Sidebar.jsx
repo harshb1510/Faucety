@@ -1,11 +1,27 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { useState } from 'react';
 
 
 
 
 
 export default function Sidebar() {
+   const [userFound,setUserFound] = useState(false);
+useEffect(() => {
+   const user = JSON.parse(localStorage.getItem("user"));
+   if(user){
+      setUserFound(true);
+   }
+   
+
+}, []);
+const logout=()=>{
+   localStorage.removeItem('token');
+   localStorage.removeItem('user');
+
+}
+ 
   return (
     <div className=''>
       
@@ -67,7 +83,10 @@ export default function Sidebar() {
                <span class="flex-1 ms-3 whitespace-nowrap">Products</span>
             </a>
          </li>
-         <li>
+         {!userFound ?
+         (
+            <>
+            <li>
             <Link to="/login" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 16">
                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 8h11m0 0L8 4m4 4-4 4m4-11h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-3"/>
@@ -85,9 +104,23 @@ export default function Sidebar() {
                <span class="flex-1 hover:text-yellow-600 ms-3 whitespace-nowrap">Sign Up</span>
             </Link>
          </li>
+         </> 
+         )
+         :(
+            <>
+             <li>
+            <Link to="/profile" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+               <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 16">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 8h11m0 0L8 4m4 4-4 4m4-11h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-3"/>
+               </svg>
+               <span class="flex-1 ms-3 hover:text-yellow-600 whitespace-nowrap">Profile</span>
+            </Link>
+         </li></>
+         )}
+        
          <li>
             <Link href="#" class="">
-               <button class="ms-3 mt-40 ml-6 border p-3 rounded-xl hover:bg-yellow-500 bg-yellow-600 w-40" >Logout</button>
+               <button onClick={logout} class="ms-3 mt-40 ml-6 border p-3 rounded-xl hover:bg-yellow-500 bg-yellow-600 w-40" >Logout</button>
             </Link>
          </li>
       </ul>
