@@ -61,7 +61,13 @@ export default function Portfolio() {
       <div className="flex justify-center items-center  gap-[90px] pt-10">
         <Sidebar />
         <div>
-          <h1 className="text-center text-white text-4xl mb-10">Portolio</h1>
+          <div className="flex justify-between ">
+          <h1 className="text-center mr-20  text-white text-4xl mb-10">Portolio</h1>
+          <button className="ml-10 mb-8 bg-yellow-500 border rounded-xl font-bold p-2">Wallet:${user.wallet}</button>
+
+          <button className="ml-2 mb-8 bg-yellow-500 border font-bold rounded-xl p-2">Staked:${user.staked}</button>
+          </div>
+
           <div className="flex justify-center">
             <div className="bg-white rounded-xl w-96  p-3">
               <div className="flex ">

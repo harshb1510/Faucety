@@ -3,6 +3,7 @@ import { useState } from "react";
 import { ethers } from "ethers";
 import { Button, notification, Card, Space, Typography } from "antd";
 import NFTMinter from "../NFTMinter.json";
+import Sidebar from "../Components/Sidebar";
 
 const NftSHM = () => {
   const [connected, setConnected] = useState(false);
@@ -121,6 +122,7 @@ const NftSHM = () => {
 
   return (
     <>
+    <Sidebar  />
       {connected ? (
         <p className="flex justify-end mr-1 p-2 text-black mt-8 bg-yellow-500 rounded-lg font-bold ">
           {selectedAddress}
