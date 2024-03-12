@@ -1,4 +1,5 @@
 const User = require("../models/userModel.js");
+const Invest = require("../models/investModel.js");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
@@ -70,7 +71,7 @@ const sendCrypto = async (req, res) => {
       res.status(404).send({ message: "Receiver Not Found" });
     }
   }
-}
+};
 
 const sendCryptoUpi = async (req, res) => {
   const { amount, userId } = req.body;
@@ -83,11 +84,11 @@ const sendCryptoUpi = async (req, res) => {
   } else {
     res.status(404).send({ message: "User Not Found" });
   }
-}
+};
 
 const borrow = async (req, res) => {
-  const { userId, borrowedINR,borrowedUSDT } = req.body;
-  const user = await User.findOne({ _id: userId }); 
+  const { userId, borrowedINR, borrowedUSDT } = req.body;
+  const user = await User.findOne({ _id: userId });
   if (user) {
     user.wallet -= parseInt(borrowedUSDT);
     user.borrow += parseInt(borrowedINR);
@@ -96,9 +97,36 @@ const borrow = async (req, res) => {
   } else {
     res.status(404).send({ message: "User Not Found" });
   }
-}
+};
 
+const addInvest = async (req, res) => {
+  const { userId, totalAmount, dip } = req.body;
+  const user = await User.findOne({ _id: userId });
+  if (user) {
+    user.wallet -= totalAmount;
+    await user.save();
+    const invest = await Invest.create({ userId, totalAmount, dip });
+    if (invest) {
+      res.status(200).send({ message: "Investment Successful" });
+    } else {
+      res.status(404).send({ message: "Investment Failed" });
+    }
+  } else {
+    res.status(404).send({ message: "User Not Found" });
+  }
+};
 
+const getInvest = async (req, res) => {
+  const userId = req.headers["x-auth-token"];
+  if (userId) {
+    const invest = await Invest.findOne({ userId : userId });
+    if (invest) {
+      return res.status(200).send({ invest });
+    }
+  } else {
+    return res.status(401).send({ error: "Investment Not Found...!" });
+  }
+};
 
 module.exports = {
   loginUser,
@@ -107,4 +135,6 @@ module.exports = {
   sendCrypto,
   sendCryptoUpi,
   borrow,
+  addInvest,
+  getInvest,
 };

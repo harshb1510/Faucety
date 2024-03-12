@@ -67,6 +67,7 @@ const Borrow = () => {
             <input
               type="text"
               id="borrowedINR"
+              placeholder="Enter Amount"
               value={borrowedINR}
               onChange={(e) => setBorrowedINR(e.target.value)}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -74,7 +75,7 @@ const Borrow = () => {
           </div>
           <button
             onClick={handleBorrowINR}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            className="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           >
             Borrow INR
           </button>
