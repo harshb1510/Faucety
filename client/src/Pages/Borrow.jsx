@@ -7,6 +7,7 @@ import axios from "axios";
 const Borrow = () => {
   const [borrowedINR, setBorrowedINR] = useState("");
   const [showModal, setShowModal] = useState(false);
+  const [userData,setUserData] = useState({});
 
   const history = useNavigate();
 
@@ -14,6 +15,69 @@ const Borrow = () => {
     const usdtAmount = (parseFloat(borrowedINR) / 82.8).toFixed(2);
     setShowModal(true);
   };
+
+  const initPayment = (data) => {
+    const options = {
+      key: "rzp_test_rrpFDSyVYUuEE4",
+      amount: data.amount,
+      currency: data.currency,
+      order_id: data.orderDetails.razorpayOrderId,
+      handler: async (response) => {
+        try {
+          const verifyUrl = `http://localhost:8000/payment/verify`;
+          const verifyData = {
+            razorpay_order_id: response.razorpay_order_id,
+            razorpay_payment_id: response.razorpay_payment_id,
+            razorpay_signature: response.razorpay_signature,
+          };
+          await axios.post(verifyUrl, verifyData);
+          await axios.post("http://localhost:8000/users/loanPay", {
+            amount: userData.borrow,
+          });
+        } catch (err) {
+          console.log(err);
+        }
+      },
+      theme: {
+        color: "#3399cc",
+      },
+    };
+    const rzp1 = new window.Razorpay(options);
+    rzp1.open();
+  };
+
+  const handleAddMoney = async () => {
+    const inrAmount = userData.borrow; 
+    await handleProceed(inrAmount);
+  };
+
+  const handleProceed = async (inrAmount) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/payment/addBooking",
+        {
+          rentPrice: inrAmount,
+        }
+      );
+      console.log(response.data);
+      initPayment(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  React.useEffect(() => {
+    const getUser = async () => {
+      const user = JSON.parse(localStorage.getItem("user"));
+      const data = await axios.get("http://localhost:8000/users/getUser", {
+        headers: {
+          "x-auth-token": user._id,
+        },
+      });
+      setUserData(data.data.user);
+    };
+    getUser();
+  }, []);
 
   const email = JSON.parse(localStorage.getItem("user")).email;
 
@@ -49,11 +113,12 @@ const Borrow = () => {
     history("/");
   };
 
+
   return (
     <>
       <Sidebar />
-      <div className="flex justify-center mt-10">
-        <div className="w-96 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+      <div className="flex justify-center  gap-10 mt-[10%] ml-[25%]">
+        <div className="w-96 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 ">
           <h2 className="text-xl font-bold mb-4">
             Get loan by Crypto as Collateral
           </h2>
@@ -79,6 +144,17 @@ const Borrow = () => {
           >
             Borrow INR
           </button>
+        </div>
+        <div className="w-96 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 text-center">
+          <h2 className="text-xl font-bold mb-4">Your Loan Details</h2>
+          <div className="mb-4 text-center">
+            <p className="text-gray-700 text-sm font-bold mb-2">
+              Borrowed USDT: {userData.borrow}
+            </p>
+          <button onClick={handleAddMoney} className="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+            Repay
+          </button>
+          </div>
         </div>
       </div>
 
