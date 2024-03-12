@@ -18,6 +18,7 @@ import Borrow from "./Pages/Borrow.jsx";
 import Profile from "./Pages/Profile.jsx";
 import NftSHM from "./Pages/NftSHM.jsx";
 import Portfolio from "./Pages/Portfolio.jsx";
+import Invested from "./Pages/Invested.jsx";
 
 
 
@@ -42,6 +43,7 @@ const App = () => (
         <Route path="/borrow" element={<Borrow />} />
         <Route path="/nftSHM" element={<NftSHM/>}></Route>
         <Route path='/portfolio' element={<Portfolio/>}/>
+        <Route path="/invested" element={<Invested />} />
       </Routes>
       <ToastContainer />
     </Router>

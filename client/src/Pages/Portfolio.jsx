@@ -12,7 +12,11 @@ export default function Portfolio() {
     <div>
       <div>
       <Sidebar />
-        <h1 className="text-center text-white text-4xl mb-10">Portolio</h1>
+<div className='flex '>
+        <h1 className="text-center ml-[600px] text-white text-4xl mb-10">Portolio</h1>
+        <button className='font-bold ml-72 border p-2 h-10 bg-yellow-600 rounded-lg text-black'>Wallet:${user.wallet}</button>
+        <button className='font-bold ml-4 border p-2 h-10 bg-yellow-600 rounded-lg text-black'>Staked:${user.staked}</button>
+        </div>
       <div className="flex justify-center">
         <div className="bg-white rounded-xl w-96  p-3">
           <div className="flex ">
