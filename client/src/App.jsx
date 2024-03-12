@@ -37,7 +37,7 @@ const App = () => (
         <Route path="/stakePools" element={<StakePools/>}/>
         <Route path="/createPool" element={<CreatePool/>}/>
         <Route path="/joinPool/:id" element={<JoinPool/>}/>
-        <Route path='/invest'element={<Invest/>}/>
+        <Route path='/invest' element={<Invest/>}/>
         <Route path='/profile' element={<Profile/>}/>
         <Route path="/borrow" element={<Borrow />} />
         <Route path="/nftSHM" element={<NftSHM/>}></Route>
