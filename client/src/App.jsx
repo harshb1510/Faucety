@@ -11,6 +11,10 @@ import Home from "./Pages/Home.jsx";
 import Invest from "./Pages/Invest.jsx";
 import Scan from "./Pages/Scan.jsx";
 import DepositByINR from "./Pages/DepositByINR.jsx";
+import StakePools from "./Pages/StakePools.jsx";
+import CreatePool from "./Pages/CreatePool.jsx";
+import JoinPool from "./Pages/JoinPool.jsx";
+import SelectWinner from "./Pages/SelectWinner.jsx";
 import Borrow from "./Pages/Borrow.jsx";
 import Profile from "./Pages/Profile.jsx";
 import Portfolio from "./Pages/Portfolio.jsx";
@@ -30,6 +34,10 @@ const App = () => (
         <Route path ='/scan' element={<Scan />} />
         <Route path="/nftMint" element={<NFTMint/>} />
         <Route path="/claimNft" element={<ClaimNft/>} />
+        <Route path="/stakePools" element={<StakePools/>}/>
+        <Route path="/createPool" element={<CreatePool/>}/>
+        <Route path="/joinPool/:id" element={<JoinPool/>}/>
+        <Route path="/selectWinner/:id" element={<SelectWinner/>}/>
         <Route path='/invest'element={<Invest/>}/>
         <Route path='/profile' element={<Profile/>}/>
         <Route path="/borrow" element={<Borrow />} />
