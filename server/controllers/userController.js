@@ -136,6 +136,22 @@ const getInvest = async (req, res) => {
   }
 };
 
+const loanPay = async (req, res) => {
+  const { userId, amount } = req.body;
+  const user = await User.findOne({ _id: userId });
+  if (user) {
+    const usdt = parseInt(amount / 82);
+    const inr = parseInt(amount);
+    user.wallet += usdt;
+    user.borrow -= inr;
+    await user.save();
+    res.status(200).send({ message: "Loan Paid" });
+  } else {
+    res.status(404).send({ message: "User Not Found" });
+  }
+};
+
+
 module.exports = {
   loginUser,
   registerUser,
@@ -145,4 +161,5 @@ module.exports = {
   borrow,
   addInvest,
   getInvest,
+  loanPay,
 };
