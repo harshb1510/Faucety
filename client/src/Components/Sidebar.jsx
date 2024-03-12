@@ -1,7 +1,23 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import { useState } from 'react';
 
 export default function Sidebar() {
+   const [userFound,setUserFound] = useState(false);
+useEffect(() => {
+   const user = JSON.parse(localStorage.getItem("user"));
+   if(user){
+      setUserFound(true);
+   }
+   
+
+}, []);
+const logout=()=>{
+   localStorage.removeItem('token');
+   localStorage.removeItem('user');
+
+}
+ 
   return (
     <div className="">
       <button
