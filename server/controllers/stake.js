@@ -9,11 +9,13 @@ const createStake = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: "Creator not found" });
     }
+    
+    const endTimeMilliseconds = Date.parse(endTime);
 
     const stakingPool = new StakingPool({
       creator: user._id,
       totalStakedAmount,
-      endTime,
+      endTime: endTimeMilliseconds, 
       cid,
       transaction,
     });
@@ -26,6 +28,7 @@ const createStake = async (req, res) => {
     return res.status(500).json({ message: "Server error" });
   }
 };
+
 
 const getStakePools = async (req, res) => {
   try {
@@ -74,22 +77,24 @@ const joinPool = async (req, res) => {
       return res.status(404).json({ message: 'Staking pool not found' });
     }
 
+    
+    const parsedAmount = parseInt(amount);
+
     const minimumAmountToStake = 10;
-    if (amount < minimumAmountToStake) {
+    if (parsedAmount < minimumAmountToStake) {
       return res.status(400).json({ message: `Minimum amount to stake is ${minimumAmountToStake}` });
     }
 
-    if (user.wallet < amount) {
+    if (user.wallet < parsedAmount) {
       return res.status(400).json({ message: 'Insufficient balance in wallet' });
     }
 
-    // Check if the user is already a participant in the staking pool
     if (stakingPool.participants.includes(user.userName)) {
       return res.status(400).json({ message: 'User is already a participant in this staking pool' });
     }
 
-    user.wallet -= amount;
-    user.staked += amount;
+    user.wallet -= parsedAmount;
+    user.staked += parsedAmount;
     await user.save();
 
     stakingPool.participants.push(user.userName);
@@ -101,6 +106,7 @@ const joinPool = async (req, res) => {
     return res.status(500).json({ message: 'Server error' });
   }
 };
+
 
 
 
@@ -147,14 +153,15 @@ const withdrawStake = async (req, res) => {
 
 const selectWinner = async (req, res) => {
   try {
-    const poolId = req.params.poolId;
-
+    const poolId = req.params.id;
     const stakingPool = await StakingPool.findById(poolId);
+
     if (!stakingPool) {
       return res.status(404).json({ message: "Staking pool not found" });
     }
-    const currentTime = new Date();
-    if (currentTime < stakingPool.endTime) {
+    const currentTime = Date.now();
+    
+    if (currentTime > stakingPool.endTime) {
       return res
         .status(400)
         .json({ message: "Staking pool end time has not passed yet" });
@@ -163,6 +170,7 @@ const selectWinner = async (req, res) => {
     const winnerIndex = Math.floor(
       Math.random() * stakingPool.participants.length
     );
+
     const winnerUsername = stakingPool.participants[winnerIndex];
 
     const winnerUser = await User.findOne({ userName: winnerUsername });
@@ -173,20 +181,20 @@ const selectWinner = async (req, res) => {
     winnerUser.wallet += stakingPool.totalStakedAmount;
     await winnerUser.save();
 
-    stakingPool.winner = winnerUsername;
+    // Assign the winner's ObjectId to the winner field
+    stakingPool.winner = winnerUser._id;
     await stakingPool.save();
 
-    return res
-      .status(200)
-      .json({
-        message: "Winner selected successfully",
-        winner: winnerUsername,
-      });
+    return res.status(200).json({
+      message: "Winner selected successfully",
+      winner: winnerUsername,
+    });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Server error" });
   }
 };
+
 
 module.exports = {
   createStake,

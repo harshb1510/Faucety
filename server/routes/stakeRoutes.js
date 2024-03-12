@@ -9,8 +9,8 @@ router.route("/createStake").post(createStake);
 router.route("/getStakePoolByID/:id").get(getStakePoolById);
 router.route("/getStakePools").get(getStakePools);
 router.route("/joinPool/:id").post(joinPool);
-// router.route("/withdrawStake").post(withdrawStake);
-router.route("/selectWinner").post(selectWinner);
+
+router.route("/selectWinner/:id").get(selectWinner);
 
 
 module.exports = router;

@@ -14,7 +14,7 @@ const stakingPoolSchema = new mongoose.Schema({
         default: 0
     },
     endTime: {
-        type: Date,
+        type: String, 
         required: true
     },
     winner: {
