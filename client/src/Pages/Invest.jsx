@@ -8,10 +8,10 @@ export default function Invest() {
   return (
     <div className='flex'>
         <Sidebar/>
-        <div className='flex justify-center shadow:bg-white border rounded-xl bg-white w-1/2  mt-20 ml-40 '>
+        <div className='flex justify-center shadow:bg-white border rounded-xl  bg-black bg-opacity-30 w-1/2  mt-20 ml-40 '>
       
       <div className='text-white text-center'>
-      <h1 className='text-black mt-4 font-bold'>Invest Your Money</h1>
+      <h1 className=' mt-4 font-bold text-white text-3xl'>Invest Your Money</h1>
 <div className="flex flex-col flex-1 items-center justify-start w-full mf:mt-0 mt-">
           <div className="p-3 flex justify-end items-start flex-col rounded-xl h-40 sm:w-72 w-full my-5 eth-card .white-glassmorphism ">
             <div className="flex justify-between flex-col w-full h-full">
@@ -33,18 +33,18 @@ export default function Invest() {
             
           </div>
          
-            <h1 className='text-black mb-4'>Start Dollar Cost leveraging</h1>
+            <h1 className='text-white font-bold mb-4'>Start Dollar Cost leveraging</h1>
             
         
-          <div className=" border rounded-lg bg-gray-200 p-3 mb-4" >
-            <h1 className='text-black text-left'> I want to buy Ethereum of :</h1>
+          <div className=" border rounded-lg bg-gray-400 p-3 mb-4" >
+            <h1 className='text-black font-bold text-left'> I want to buy Ethereum of :</h1>
             <div className='flex mt-3 mb-4 '>
                 <input className='border p-3 rounded-xl mr-2 text-black' placeholder='Amount Per Day:'/>
                 <input className='border p-3 rounded-xl text-black' placeholder='No of Days'/>
 
             </div>
           </div>
-            <button className='bg-yellow-500 p-3 rounded-xl mb-4 w-56 text-white'>Invest</button>
+            <button className='bg-yellow-500 p-3 rounded-xl mb-4 w-56 text-black font-bold hover:bg-yellow-600'>Invest</button>
 </div>
 
     </div>
