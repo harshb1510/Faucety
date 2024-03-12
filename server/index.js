@@ -98,6 +98,7 @@ app.get("/claimNft", async (req, res) => {
 const userRoutes = require("./routes/userRoutes");
 const nftRoutes = require("./routes/nftRoutes.js");
 const paymentRoutes = require("./routes/paymentRoutes.js");
+const stakeRoutes = require("./routes/stakeRoutes.js");
 
 const PORT = process.env.PORT || 8000;
 dbConnect();
@@ -109,6 +110,7 @@ app.get("/", async (req, res) => {
 app.use("/users", userRoutes);
 app.use("/nft", nftRoutes);
 app.use("/payment",paymentRoutes);
+app.use("/stake",stakeRoutes);
 
 const server = app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);

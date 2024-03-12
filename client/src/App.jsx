@@ -11,8 +11,10 @@ import Home from "./Pages/Home.jsx";
 import Invest from "./Pages/Invest.jsx";
 import Scan from "./Pages/Scan.jsx";
 import DepositByINR from "./Pages/DepositByINR.jsx";
-
-
+import StakePools from "./Pages/StakePools.jsx";
+import CreatePool from "./Pages/CreatePool.jsx";
+import JoinPool from "./Pages/JoinPool.jsx";
+import SelectWinner from "./Pages/SelectWinner.jsx";
 
 
 
@@ -28,7 +30,11 @@ const App = () => (
         <Route path ='/scan' element={<Scan />} />
         <Route path="/nftMint" element={<NFTMint/>} />
         <Route path="/claimNft" element={<ClaimNft/>} />
-        <Route path='/invest'element={<Invest/>}/>
+        <Route path='/invest' element={<Invest/>}/>
+        <Route path="/stakePools" element={<StakePools/>}/>
+        <Route path="/createPool" element={<CreatePool/>}/>
+        <Route path="/joinPool/:id" element={<JoinPool/>}/>
+        <Route path="/selectWinner/:id" element={<SelectWinner/>}/>
       </Routes>
       <ToastContainer/>
     </Router>
