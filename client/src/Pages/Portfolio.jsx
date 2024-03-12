@@ -145,12 +145,11 @@ export default function Portfolio() {
               value={JSON.stringify(bookingData)}
               style={{ width: "200px", height: "200px" }}
             />
-            <button
-              onClick={() => setBookingData(null)}
-              className="mt-4  px-4 py-2 hover:bg-yellow-700 w-full bg-yellow-600 text-white bg-b-900 rounded-md"
+            <p
+              className="mt-4  px-4 py-2 font-bold text-white bg-b-900 rounded-md"
             >
-              Close
-            </button>
+              Receive Money through this QR
+            </p>
           </div>
         )}
       </div>
@@ -158,9 +157,9 @@ export default function Portfolio() {
         {!isScanning&&(
         <button
           onClick={() => setIsScanning(true)}
-          className="bg-white rounded p-3 ml-[750px] mt-[60px]"
+          className="bg-white rounded p-3 ml-[690px] mt-[60px] font-bold"
         >
-          Scan Now
+          Send Money
         </button>
         )}
         {isScanning && (
