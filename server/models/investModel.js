@@ -10,7 +10,7 @@ const investSchema = new mongoose.Schema({
     dip : {
         type: Number,
     },
-    userName : {
+    userId : {
         type: String,
     },
     remainInvest : {

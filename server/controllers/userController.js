@@ -119,7 +119,7 @@ const addInvest = async (req, res) => {
 const getInvest = async (req, res) => {
   const userId = req.headers["x-auth-token"];
   if (userId) {
-    const invest = await Invest.findOne({ userId });
+    const invest = await Invest.findOne({ userId : userId });
     if (invest) {
       return res.status(200).send({ invest });
     }

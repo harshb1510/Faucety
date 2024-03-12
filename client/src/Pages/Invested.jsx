@@ -1,9 +1,31 @@
-import React from 'react'
+import React from "react";
+import axios from "axios";
+import { useEffect } from "react";
 
-export default function Invested() {
-  return (
-    <div>
-      invested
-    </div>
-  )
-}
+const Invested = () => {
+  const userId = JSON.parse(localStorage.getItem("user"))._id;
+
+  useEffect(() => {
+    getInvest(userId);
+  }, []);
+
+  const getInvest = async (userId) => {
+    try {
+      const response = await axios.get(
+        "http://localhost:8000/users/getInvest",
+        {
+          headers: {
+            "x-auth-token": userId,
+          },
+        }
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return <div>Invested</div>;
+};
+
+export default Invested;
