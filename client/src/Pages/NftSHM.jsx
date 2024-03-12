@@ -100,18 +100,18 @@ const NftSHM = () => {
         });
       } catch (error) {
         notification.success({
-            message: "Success",
-            description: (
-              <span>
-                Minting completed! Transaction hash:
-                <Link
-                  href={`https://explorer-hackathon.shardeum.org/transaction/0xec32d262b440e6b68437bfc25051ea53fa3359f03e59bb3046a1481e54a39eac`}
-                  target="_blank"
-                >
-                  {`https://explorer-hackathon.shardeum.org/transaction/0xec32d262b440e6b68437bfc25051ea53fa3359f03e59bb3046a1481e54a39eac`}
-                </Link>
-              </span>
-            ),
+          message: "Success",
+          description: (
+            <span>
+              Minting completed! Transaction hash:
+              <Link
+                href={`https://explorer-hackathon.shardeum.org/transaction/0xec32d262b440e6b68437bfc25051ea53fa3359f03e59bb3046a1481e54a39eac`}
+                target="_blank"
+              >
+                {`https://explorer-hackathon.shardeum.org/transaction/0xec32d262b440e6b68437bfc25051ea53fa3359f03e59bb3046a1481e54a39eac`}
+              </Link>
+            </span>
+          ),
         });
       } finally {
         setMinting(false);
@@ -122,10 +122,18 @@ const NftSHM = () => {
   return (
     <>
       {connected ? (
-        <p>{selectedAddress}</p>
+        <p className="flex justify-end mr-1 p-2 text-black mt-8 bg-yellow-500 rounded-lg font-bold ">
+          {selectedAddress}
+        </p>
       ) : (
         <div className="flex  justify-end">
-        <button className="flex justify-end mr-10 border p-2 text-black mt-8 bg-yellow-500 rounded-lg font-bold " onClick={handleConnect}>Connect Wallet</button></div>
+          <button
+            className="flex justify-end mr-10 border p-2 text-black mt-8 bg-yellow-500 rounded-lg font-bold "
+            onClick={handleConnect}
+          >
+            Connect Wallet
+          </button>
+        </div>
       )}
       <div
         style={{
