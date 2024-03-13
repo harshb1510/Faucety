@@ -23,7 +23,7 @@ export default function Invest() {
   return (
     <div className="flex">
       <Sidebar />
-      <div className="flex justify-center shadow:bg-white border rounded-xl  bg-black bg-opacity-30 w-1/2  mt-20 ml-40 ">
+      <div className="flex justify-center shadow:bg-white border rounded-xl  bg-transparent  w-1/2  mt-20 ml-40 ">
         <div className="text-white text-center">
           <h3 className=" mt-4 font-bold text-white text-2xl">
             Invest Your Money by DCA Strategy
