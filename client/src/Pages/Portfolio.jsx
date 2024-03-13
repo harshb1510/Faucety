@@ -80,13 +80,13 @@ export default function Portfolio() {
         <div>
           <div className="flex justify-between ">
           <h1 className="text-center mr-20  text-white text-4xl mb-10">Portolio</h1>
-          <button className="ml-10 mb-8 bg-yellow-500 border rounded-xl font-bold p-2">Wallet:${user.wallet}</button>
+          <button className="ml-10 mb-8 bg-transparent border text-white rounded-xl font-bold p-2">Wallet:${user.wallet}</button>
 
           <button className="ml-2 mb-8 bg-yellow-500 border font-bold rounded-xl p-2">Staked:${user.staked}</button>
           </div>
 
           <div className="flex justify-center">
-            <div className="bg-white rounded-xl w-96  p-3">
+            <div className="bg-transparent border text-white rounded-xl w-96  p-3">
               <div className="flex ">
                 <div>
                   <img
@@ -114,14 +114,14 @@ export default function Portfolio() {
           </div>
 
           <div className="flex justify-evenly items-center mt-4">
-            <div className="bg-white p-4 w-96 rounded-xl  ">
-              <h1 className="text-black text-left border-b font-bold">
+            <div className="bg-transparent border text-white p-4 w-96 rounded-xl  ">
+              <h1 className="text-white text-left border-b font-bold">
                 Tokens
               </h1>
-              <div className="flex ">
-                <div className="bg-white rounded-xl p-1">
-                  <div className="flex mt-4 ">
-                    <div>
+              <div className="flex mt-4 ml-2 ">
+                <div className="bg-transparent border text-white rounded-xl p-2">
+                  <div className="flex mt-4 border-b ">
+                    <div className="mb-3">
                       <img
                         src="icon.jpeg"
                         className="h-12 w-12 rounded-2xl "
@@ -163,7 +163,7 @@ export default function Portfolio() {
         </div>
 
         {bookingData && (
-          <div className="flex flex-col items-center mt-[80px] bg-white p-4">
+          <div className="flex flex-col items-center mt-[80px] bg-white p-4 rounded-[10px]">
             <QRCode
               value={JSON.stringify(bookingData)}
               style={{ width: "200px", height: "200px",marginTop:'25px' }}
@@ -178,13 +178,13 @@ export default function Portfolio() {
         {!isScanning && (
           <button
             onClick={() => setIsScanning(true)}
-            className="bg-white rounded p-3 ml-[690px] mt-[60px] font-bold"
+            className="bg-white rounded p-3 ml-[690px] mt-[40px] font-bold "
           >
             Send Money
           </button>
         )}
         {isScanning && (
-          <div className="h-[370px] w-[370px] m-auto pt-4 pl-8">
+          <div className="h-[370px] w-[370px] m-auto pt-2 pl-8">
             <Scanner
               components={{
                 audio: false,

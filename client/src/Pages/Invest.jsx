@@ -9,7 +9,7 @@ export default function Invest() {
   const [totalAmount, setTotalAmount] = React.useState("");
   const [dip, setDip] = React.useState("");
 
- const userId = JSON.parse(localStorage.getItem("user"))._id;
+ const userId = JSON.parse(localStorage.getItem("user"))?._id||{};
 
   const handleInvest = async() => {
     const data = await axios.post("http://localhost:8000/users/addInvest", {
