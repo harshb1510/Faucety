@@ -19,7 +19,7 @@ export default function Portfolio() {
   useEffect(() => {
     const getUser = async () => {
       const user = JSON.parse(localStorage.getItem("user"));
-      const data = await axios.get("http://localhost:8000/users/getUser", {
+      const data = await axios.get("https://faucety.onrender.com/users/getUser", {
         headers: {
           "x-auth-token": user._id,
         },
@@ -49,7 +49,7 @@ export default function Portfolio() {
       amount: usdtAmount,
     };
     const response = await axios.post(
-      "http://localhost:8000/users/sendCrypto",
+      "https://faucety.onrender.com/users/sendCrypto",
       data
     );
     console.log(response);

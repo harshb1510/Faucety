@@ -25,7 +25,7 @@ const DepositByINR = () => {
   const handleProceed = async (inrAmount) => {
     try {
       const response = await axios.post(
-        "http://localhost:8000/payment/addBooking",
+        "https://faucety.onrender.com/payment/addBooking",
         {
           rentPrice: inrAmount,
         }
@@ -45,14 +45,14 @@ const DepositByINR = () => {
       order_id: data.orderDetails.razorpayOrderId,
       handler: async (response) => {
         try {
-          const verifyUrl = `http://localhost:8000/payment/verify`;
+          const verifyUrl = `https://faucety.onrender.com/payment/verify`;
           const verifyData = {
             razorpay_order_id: response.razorpay_order_id,
             razorpay_payment_id: response.razorpay_payment_id,
             razorpay_signature: response.razorpay_signature,
           };
           await axios.post(verifyUrl, verifyData);
-          await axios.post("http://localhost:8000/users/sendCryptoUpi", {
+          await axios.post("https://faucety.onrender.com/users/sendCryptoUpi", {
             amount: usdtAmount,
             userId: userId
           });

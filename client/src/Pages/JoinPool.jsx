@@ -13,7 +13,7 @@ const JoinPool = () => {
     const fetchPoolDetails = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8000/stake/getStakePoolByID/${id}`
+          `https://faucety.onrender.com/stake/getStakePoolByID/${id}`
         );
         const data = await response.json();
         setPool(data);
@@ -31,7 +31,7 @@ const JoinPool = () => {
   const handleJoinPool = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8000/stake/joinPool/${id}`,
+        `https://faucety.onrender.com/stake/joinPool/${id}`,
         {
           method: "POST",
           headers: {
@@ -51,7 +51,7 @@ const JoinPool = () => {
   // Function to handle selecting a winner
   const handleSelectWinner = async () => {
     try {
-      const response = await fetch(`http://localhost:8000/stake/selectWinner/${id}`, {
+      const response = await fetch(`https://faucety.onrender.com/stake/selectWinner/${id}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

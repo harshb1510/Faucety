@@ -21,7 +21,7 @@ const CreatePool = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:8000/stake/createStake', {
+      const response = await fetch('https://faucety.onrender.com/stake/createStake', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

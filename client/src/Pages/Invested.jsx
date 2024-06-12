@@ -15,7 +15,7 @@ const Invested = () => {
   const getInvest = async (userId) => {
     try {
       const response = await axios.get(
-        "http://localhost:8000/users/getInvest",
+        "https://faucety.onrender.com/users/getInvest",
         {
           headers: {
             "x-auth-token": userId,

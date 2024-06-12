@@ -9,7 +9,7 @@ const ClaimNft = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:8000/claimNft", {
+        const response = await fetch("https://faucety.onrender.com/claimNft", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -29,7 +29,7 @@ const ClaimNft = () => {
 
     const handleSuccess = async () => { 
     try {
-      const response = await fetch("http://localhost:8000/nft/claimSuccess", {
+      const response = await fetch("https://faucety.onrender.com/nft/claimSuccess", {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

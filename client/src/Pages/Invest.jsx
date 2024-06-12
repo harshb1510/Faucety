@@ -12,7 +12,7 @@ export default function Invest() {
  const userId = JSON.parse(localStorage.getItem("user"))?._id||{};
 
   const handleInvest = async() => {
-    const data = await axios.post("http://localhost:8000/users/addInvest", {
+    const data = await axios.post("https://faucety.onrender.com/users/addInvest", {
       userId,
       totalAmount,
       dip,

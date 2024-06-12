@@ -37,14 +37,14 @@ const Borrow = () => {
       order_id: data.orderDetails.razorpayOrderId,
       handler: async (response) => {
         try {
-          const verifyUrl = `http://localhost:8000/payment/verify`;
+          const verifyUrl = `https://faucety.onrender.com/payment/verify`;
           const verifyData = {
             razorpay_order_id: response.razorpay_order_id,
             razorpay_payment_id: response.razorpay_payment_id,
             razorpay_signature: response.razorpay_signature,
           };
           await axios.post(verifyUrl, verifyData);
-          await axios.post("http://localhost:8000/users/loanPay", {
+          await axios.post("https://faucety.onrender.com/users/loanPay", {
             amount: userData.borrow,
             userId:userId
           });
@@ -69,7 +69,7 @@ const Borrow = () => {
   const handleProceed = async (inrAmount) => {
     try {
       const response = await axios.post(
-        "http://localhost:8000/payment/addBooking",
+        "https://faucety.onrender.com/payment/addBooking",
         {
           rentPrice: inrAmount,
         }
@@ -84,7 +84,7 @@ const Borrow = () => {
   React.useEffect(() => {
     const getUser = async () => {
       const user = JSON.parse(localStorage.getItem("user"));
-      const data = await axios.get("http://localhost:8000/users/getUser", {
+      const data = await axios.get("https://faucety.onrender.com/users/getUser", {
         headers: {
           "x-auth-token": user._id,
         },
@@ -105,7 +105,7 @@ const Borrow = () => {
 
   const confirmBorrow = async () => {
     const user = JSON.parse(localStorage.getItem("user"));
-    const data = await axios.post("http://localhost:8000/users/borrow", {
+    const data = await axios.post("https://faucety.onrender.com/users/borrow", {
       userId: user._id,
       borrowedINR: borrowedINR,
       borrowedUSDT: (parseFloat(borrowedINR) / 82.8).toFixed(2),
